@@ -1,10 +1,18 @@
-import { FlatList, ScrollView, StyleSheet, Text, View, Image, TouchableHighlight, Modal, StatusBar } from 'react-native';
-import CategoriesScreen from './screens/CategoriesScreen';
-import { NavigationContainer } from '@react-navigation/native';
+import { StyleSheet, Text, StatusBar, Button } from 'react-native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import MealsListScreen from './screens/MealsListScreen';
+import SimpsonsListScreen from './screens/SimpsonsListScreen';
+import SimpsonDetailScreen from './screens/SimpsonDetailScreen';
+import SimpsonsDataContextProvider, { SimpsonsDataContext } from './store/context/simpsons-data';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import AddSimpsonScreen from './screens/AddSimpsonScreen';
+import { useContext } from 'react';
 
 const Stack = createNativeStackNavigator();
+const BottomTabs = createBottomTabNavigator();
+
+
+
 
 export default function App() {
 
@@ -12,10 +20,21 @@ export default function App() {
     <>
       <StatusBar style='light' />
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="MealCategories" component={CategoriesScreen} />
-          <Stack.Screen name="MealsList" component={MealsListScreen} />
-        </Stack.Navigator>
+        <SimpsonsDataContextProvider>
+          <Stack.Navigator>
+            <Stack.Screen name="SimpsonsList" component={SimpsonsListScreen}
+            // options={
+            //   {
+            //     headerRight: () => {
+            //       return <Button title="Add Simpson" onPress={menuHandler} />
+            //     }
+            //   }
+            // }
+            />
+            <Stack.Screen name="SimpsonDetail" component={SimpsonDetailScreen} />
+            <Stack.Screen name="AddSimpson" component={AddSimpsonScreen} />
+          </Stack.Navigator>
+        </SimpsonsDataContextProvider>
       </NavigationContainer>
     </>
   );
