@@ -26,7 +26,7 @@ function SimpsonDetailScreen({ route, navigation }) {
         <View style={styles.container}>
             <Pressable android_ripple={{ color: '#ccc' }} style={({ pressed }) => [styles.button, pressed ? styles.buttonPressed : null,]}  >
                 <View style={styles.simpContainer} >
-                    <Image source={{ uri: selectedSimpson && selectedSimpson.avatar.split("revision")[0] }} style={{ width: 240, height: 240, resizeMode: 'contain' }} />
+                    <Image source={{ uri: selectedSimpson && selectedSimpson.avatar?.split("revision")[0] }} style={{ width: 240, height: 240, resizeMode: 'contain' }} />
                     <Text style={styles.textSimp} > {selectedSimpson && selectedSimpson.name} </Text>
                     <Text style={styles.jobSimp} > {selectedSimpson && selectedSimpson.job} </Text>
                     <Text style={styles.descSimp} > {selectedSimpson && selectedSimpson.description} </Text>

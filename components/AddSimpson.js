@@ -1,4 +1,4 @@
-import { Text, StyleSheet, TextInput, View, ScrollView, Button } from "react-native";
+import { Text, StyleSheet, TextInput, View, ScrollView, Button, Alert } from "react-native";
 import { useNavigation } from '@react-navigation/native'
 import { useContext, useState } from "react";
 import { SimpsonsDataContext } from "../store/context/simpsons-data";
@@ -18,11 +18,23 @@ function AddSimpson() {
     const navigation = useNavigation();
 
     const addHandler = async () => {
-        await simpsonsCtx.setSimpsons(
-            current => [...current, { id: simpsonsCtx.simpsonsData.length + 1, name: nameSurname, avatar: imgURL, about: description, job: jobTitle }]
-        )
-        AsyncStorage.setItem("@simpsonsStorage", JSON.stringify(simpsonsCtx.simpsonsData));
-        navigation.pop();
+        if (nameSurname.trim() == "") {
+            Alert.alert("Please Fill the Name");
+        } else if (jobTitle.trim() == "") {
+            Alert.alert("Please Fill the Job Title");
+        } else if (description.trim() == "") {
+            Alert.alert("Please Fill the About");
+        }
+
+        else {
+            await simpsonsCtx.setSimpsons(
+                current => [...current, { id: simpsonsCtx.simpsonsData.length + 1, name: nameSurname, avatar: imgURL, about: description, job: jobTitle }]
+            )
+            AsyncStorage.setItem("@simpsonsStorage", JSON.stringify(simpsonsCtx.simpsonsData));
+            navigation.pop();
+        }
+
+        console.log(nameSurname + " " + jobTitle, " " + description + " " + imgURL);
     }
 
     return (
