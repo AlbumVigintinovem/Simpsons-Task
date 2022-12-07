@@ -7,9 +7,28 @@ import SimpsonsDataContextProvider, { SimpsonsDataContext } from './store/contex
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AddSimpsonScreen from './screens/AddSimpsonScreen';
 import { useContext } from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
+
+// const DrawerNavigator = () => {
+//   return (
+//     <Drawer.Navigator>
+//       <Drawer.Screen name="SimpsonsList" component={SimpsonsListScreen}
+//       // options={
+//       //   {
+//       //     headerRight: () => {
+//       //       return <Button title="Add Simpson" onPress={menuHandler} />
+//       //     }
+//       //   }
+//       // }
+//       />
+//       <Drawer.Screen name='AddSimpson' component={AddSimpsonScreen} />
+//     </Drawer.Navigator>
+//   )
+// }
 
 
 
@@ -22,15 +41,8 @@ export default function App() {
       <NavigationContainer>
         <SimpsonsDataContextProvider>
           <Stack.Navigator>
-            <Stack.Screen name="SimpsonsList" component={SimpsonsListScreen}
-            // options={
-            //   {
-            //     headerRight: () => {
-            //       return <Button title="Add Simpson" onPress={menuHandler} />
-            //     }
-            //   }
-            // }
-            />
+            <Stack.Screen name="SimpsonsList" component={SimpsonsListScreen} />
+            {/* <Stack.Screen name="Home" component={DrawerNavigator} options={{ headerShown: false }} /> */}
             <Stack.Screen name="SimpsonDetail" component={SimpsonDetailScreen} />
             <Stack.Screen name="AddSimpson" component={AddSimpsonScreen} />
           </Stack.Navigator>

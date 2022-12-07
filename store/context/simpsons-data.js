@@ -3,6 +3,7 @@ import { createContext } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 export const SimpsonsDataContext = createContext({
     simpsonsData: [],
@@ -39,12 +40,9 @@ function SimpsonsDataContextProvider({ children }) {
 
     //Delete Character
     const deleteHandler = (id) => {
-        setSimpsons(
-            simpsons.filter(
-                e => e.id != id
-            )
-        )
-        AsyncStorage.setItem("@simpsonsStorage", JSON.stringify(simpsons));
+        const filteredSimpsons = simpsons.filter(e => e.id != id);
+        setSimpsons(filteredSimpsons)
+        AsyncStorage.setItem("@simpsonsStorage", JSON.stringify(filteredSimpsons));
     }
 
     //Move Up Character

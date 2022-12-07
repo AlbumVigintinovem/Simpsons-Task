@@ -13,16 +13,17 @@ function AddSimpson() {
     const [jobTitle, setJobTitle] = useState();
     const [description, setDescription] = useState();
     const [imgURL, setImgURL] = useState();
+    const [imgURL_, setImgURL_] = useState(0);
 
 
     const navigation = useNavigation();
 
     const addHandler = async () => {
-        if (nameSurname.trim() == "") {
+        if (nameSurname?.trim() == "" || nameSurname === undefined) {
             Alert.alert("Please Fill the Name");
-        } else if (jobTitle.trim() == "") {
+        } else if (jobTitle?.trim() == "" || jobTitle === undefined) {
             Alert.alert("Please Fill the Job Title");
-        } else if (description.trim() == "") {
+        } else if (description?.trim() == "" || description === undefined) {
             Alert.alert("Please Fill the About");
         }
 
@@ -31,12 +32,9 @@ function AddSimpson() {
                 current => [...current, { id: simpsonsCtx.simpsonsData.length + 1, name: nameSurname, avatar: imgURL, about: description, job: jobTitle }]
             )
             AsyncStorage.setItem("@simpsonsStorage", JSON.stringify(simpsonsCtx.simpsonsData));
-            navigation.pop();
+            navigation.navigate("SimpsonsList");
         }
-
-        console.log(nameSurname + " " + jobTitle, " " + description + " " + imgURL);
     }
-
     return (
         <ScrollView style={styles.container} >
             <Text style={styles.text} >Name Surname:</Text>
