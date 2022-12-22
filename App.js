@@ -4,14 +4,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import SimpsonsListScreen from './screens/SimpsonsListScreen';
 import SimpsonDetailScreen from './screens/SimpsonDetailScreen';
 import SimpsonsDataContextProvider, { SimpsonsDataContext } from './store/context/simpsons-data';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AddSimpsonScreen from './screens/AddSimpsonScreen';
 import { useContext } from 'react';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+// import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Stack = createNativeStackNavigator();
-const BottomTabs = createBottomTabNavigator();
-const Drawer = createDrawerNavigator();
+// const BottomTabs = createBottomTabNavigator();
+// const Drawer = createDrawerNavigator();
 
 // const DrawerNavigator = () => {
 //   return (

@@ -36,6 +36,7 @@ function SimpsonsDataContextProvider({ children }) {
     const [newSimpsons, setNewSimpsons] = useState([]);
     const [loading, setLoading] = useState();
     const [simpsonsStorage, setSimpsonsStorage] = useState();
+    const [simpsonsStorageSorted, setSimpsonsStorageSorted] = useState();
 
 
     //Delete Character
@@ -64,10 +65,17 @@ function SimpsonsDataContextProvider({ children }) {
         AsyncStorage.setItem("@simpsonsStorage", JSON.stringify(simpsons));
     }
 
+    // const selectedSimpson = simpsonsCtx.simpsonsData?.find((simpson) => simpson.id === simpId);
+
     async function getStorage() {
-        const value = await AsyncStorage.getItem('@simpsonsStorage')
+        const value = await AsyncStorage.getItem('@simpsonsStorage');
+        const sortedValue = JSON.parse(value).sort();
+        const sortedValue_ = sortedValue.map(e => e.name).sort();
+        // console.log(sortedValue_);
+        const finalValue = sortedValue_.map((e, i) => JSON.parse(value).find((simpson) => simpson.name === e));
+        // console.log(sortedValue_)
         if (value) {
-            setSimpsons(JSON.parse(value))
+            setSimpsons(finalValue);
             return;
         } else {
             axios.get("https://5fc9346b2af77700165ae514.mockapi.io/simpsons")
