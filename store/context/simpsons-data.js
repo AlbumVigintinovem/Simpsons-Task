@@ -71,9 +71,7 @@ function SimpsonsDataContextProvider({ children }) {
         const value = await AsyncStorage.getItem('@simpsonsStorage');
         const sortedValue = JSON.parse(value).sort();
         const sortedValue_ = sortedValue.map(e => e.name).sort();
-        // console.log(sortedValue_);
         const finalValue = sortedValue_.map((e, i) => JSON.parse(value).find((simpson) => simpson.name === e));
-        // console.log(sortedValue_)
         if (value) {
             setSimpsons(finalValue);
             return;
